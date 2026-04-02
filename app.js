@@ -1,6 +1,7 @@
 // ===== Config =====
 const PROXY_URL = 'https://gemini-proxy.otto-mr.workers.dev';
 const MODEL = 'gemini-2.0-flash';
+const LOGGER_URL = 'https://script.google.com/macros/s/AKfycbzlEJA7xHa3M-sihN18x5px_BRubvzFh2XnOgBMA-sE142YwDkO5wmgkHaR41sZwcJXXQ/exec';
 
 // ===== Knowledge Base (System Prompt) =====
 const SYSTEM_PROMPT = `你是「力曼新制度解讀小幫手」，專門協助力曼台灣獨立經銷商了解 2026 年 5 月起施行的新價格與獎勵制度。
@@ -242,6 +243,7 @@ async function sendText(text) {
 
     history.push({ role: 'model', parts: [{ text: replyText }] });
     appendMessage('assistant', replyText);
+    logQA(text, replyText);
 
   } catch (err) {
     removeTyping(typingId);
@@ -309,6 +311,16 @@ function setLoading(isLoading) {
 
 function scrollToBottom() {
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+// ===== Logger =====
+function logQA(question, answer) {
+  if (!LOGGER_URL) return;
+  fetch(LOGGER_URL, {
+    method: 'POST',
+    body: JSON.stringify({ question, answer }),
+    redirect: 'follow'
+  }).catch(() => {}); // 靜默失敗，不影響使用者
 }
 
 // Simple text formatter: **bold**, line breaks, basic table detection

@@ -166,6 +166,7 @@ const SYSTEM_PROMPT = `你是「力曼新制度解讀小幫手」，專門協助
 
 // ===== State =====
 const history = []; // { role: 'user'|'model', parts: [{text}] }
+const SESSION_ID = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -318,7 +319,7 @@ function logQA(question, answer) {
   if (!LOGGER_URL) return;
   fetch(LOGGER_URL, {
     method: 'POST',
-    body: JSON.stringify({ question, answer }),
+    body: JSON.stringify({ session_id: SESSION_ID, question, answer }),
     redirect: 'follow'
   }).catch(() => {}); // 靜默失敗，不影響使用者
 }

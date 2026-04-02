@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新制度解讀小幫手 — RIMAN 力曼</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <div class="brand-badge">RIMAN</div>
+      <h1>新制度解讀小幫手</h1>
+      <p class="subtitle">關於五月調價與新獎勵制度，歡迎直接提問</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 聊天視窗 -->
+    <div class="chat-window" id="chat-window">
+      <!-- 歡迎訊息由 JS 插入 -->
+    </div>
+
+    <!-- 建議問題 -->
+    <div class="suggestions" id="suggestions">
+      <button class="suggestion-btn" onclick="askSuggestion(this)">五月調價後，SP 和 BP 有什麼變動？</button>
+      <button class="suggestion-btn" onclick="askSuggestion(this)">晉升經理需要達到多少業績？</button>
+      <button class="suggestion-btn" onclick="askSuggestion(this)">企業家位階要怎麼維持？</button>
+      <button class="suggestion-btn" onclick="askSuggestion(this)">SP 和 BP 有什麼不同？</button>
+      <button class="suggestion-btn" onclick="askSuggestion(this)">活躍會員的定義是什麼？</button>
+      <button class="suggestion-btn" onclick="askSuggestion(this)">使用回饋金（RP）購物，業績會受影響嗎？</button>
+    </div>
+
+    <!-- 輸入區 -->
+    <div class="input-area">
+      <textarea
+        class="input-box"
+        id="input-box"
+        placeholder="輸入你的問題…"
+        rows="1"
+        onkeydown="handleKeydown(event)"
+        oninput="autoResize(this)"
+      ></textarea>
+      <button class="send-btn" id="send-btn" onclick="sendMessage()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

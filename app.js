@@ -1,6 +1,6 @@
 // ===== Config =====
 const PROXY_URL = 'https://gemini-proxy.otto-mr.workers.dev';
-const MODEL = 'gemini-2.0-flash';
+const MODEL = 'gemini-flash-latest'; // gemini-2.0-flash 已於 2026-07 前後被 Google 下架(404)
 const LOGGER_URL = 'https://script.google.com/macros/s/AKfycbzlEJA7xHa3M-sihN18x5px_BRubvzFh2XnOgBMA-sE142YwDkO5wmgkHaR41sZwcJXXQ/exec';
 
 // ===== Knowledge Base (System Prompt) =====

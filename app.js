@@ -1,6 +1,6 @@
 // ===== Config =====
 const PROXY_URL = 'https://gemini-proxy.otto-mr.workers.dev';
-const MODEL = 'gemini-flash-latest'; // gemini-2.0-flash 已於 2026-07 前後被 Google 下架(404)
+const MODEL = 'gemini-3.6-flash'; // 新金鑰可用的明確版本，避免 latest 別名漂移
 const LOGGER_URL = 'https://script.google.com/macros/s/AKfycbzlEJA7xHa3M-sihN18x5px_BRubvzFh2XnOgBMA-sE142YwDkO5wmgkHaR41sZwcJXXQ/exec';
 
 // ===== Knowledge Base (System Prompt) =====
@@ -281,7 +281,8 @@ async function sendText(text) {
       contents: history,
       generationConfig: {
         temperature: 0.75,
-        maxOutputTokens: 2500
+        maxOutputTokens: 4000,
+        thinkingConfig: { thinkingLevel: "low" }
       }
     };
 
@@ -302,7 +303,7 @@ async function sendText(text) {
 
     if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
 
-    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    const replyText = data.candidates?.[0]?.content?.parts?.find(part => typeof part.text === 'string')?.text;
     if (!replyText) throw new Error('回應內容為空，請稍後再試。');
 
     history.push({ role: 'model', parts: [{ text: replyText }] });
